@@ -13,3 +13,7 @@
 ### One-Line Installer
 ```bash
 pkg update -y && pkg upgrade -y && pkg install git python -y && pip install requests pytz rich && git clone https://github.com/khamdihi-dev/ighack/ && cd ighack && python run.py
+```
+### Update tools
+```
+cd $HOME;cd ighack;git pull;python run.py
