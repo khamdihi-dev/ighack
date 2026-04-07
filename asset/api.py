@@ -50,7 +50,8 @@ class api:
         try:
             self.variabel = 'variables={"id":"%s","first":150,"after":"%s"}'%(userid,after)
             self.params = "query_hash=58712303d941c6855d4e888c5f0cd22f&{}".format(self.variabel) if not mode else "query_hash=37479f2b8209594dde7facb0d904896a&{}".format(self.variabel)
-            self.respon = requests.get(self.web_query_endpoint,params=self.params,headers={"user-agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36","accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","cookie": self.cookie}).json()
+            self.respon = requests.get(self.web_query_endpoint,params=self.params,
+                                       headers={"user-agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36","accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","cookie": self.cookie}).json()
             self.edges_type = 'edge_followed_by' if mode else 'edge_follow'
             for a in self.respon['data']['user'][self.edges_type]['edges']:
                 dump_list.append(json.dumps(a))
@@ -71,14 +72,22 @@ class api:
 
     def profile_info(self,username):
         try:
-            self.head = {'Host': 'www.instagram.com','cache-control': 'max-age=0','upgrade-insecure-requests': '1','accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7','sec-fetch-site': 'none','user-agent':self.useragent}
-            respon = requests.get(f'https://www.instagram.com/api/v1/users/web_profile_info/?username={username}', headers=self.head).json()['data']['user']
-            followers,following,posting = respon['edge_followed_by']['count'],respon['edge_follow']['count'],respon['edge_owner_to_timeline_media']['count']
-            return {
-                'followers':followers,'following':following,'postingan':posting
+            self.head = {'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7','accept-language': 'id,en-US;q=0.9,en;q=0.8,ms;q=0.7','cache-control': 'max-age=0','dpr': '1','priority': 'u=0, i','sec-ch-prefers-color-scheme': 'light','sec-ch-ua': '"Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"','sec-ch-ua-full-version-list': '"Chromium";v="146.0.7680.178", "Not-A.Brand";v="24.0.0.0", "Google Chrome";v="146.0.7680.178"','sec-ch-ua-mobile': '?1','sec-ch-ua-model': '"Pixel 6"','sec-ch-ua-platform': '"Android"','sec-ch-ua-platform-version': '"12"','sec-fetch-dest': 'document','sec-fetch-mode': 'navigate','sec-fetch-site': 'none','sec-fetch-user': '?1','upgrade-insecure-requests': '1','sec-fetch-site': 'none','user-agent':'Mozilla/5.0 (Linux; Android 13; SM-A346M Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/144.0.7559.87 Mobile Safari/537.36 Instagram 413.0.0.41.84 Android (33/13; 401dpi; 1080x2340; samsung; SM-A346M; a34x; mt6877; pt_BR; 865356678; IABMV/1)'}
+            if self.cookie:self.head.update({'cookie':self.cookie})
+            respon1 = requests.get(f'https://www.instagram.com/api/v1/users/web_profile_info/?username={username}', headers=self.head)
+            if respon1.status_code == 200:
+                respon = respon1.json()['data']['user']
+                followers,following,posting = respon['edge_followed_by']['count'],respon['edge_follow']['count'],respon['edge_owner_to_timeline_media']['count']
+                return {
+                    'followers':followers,'following':following,'postingan':posting
+                }
+            else:
+                return {
+                'followers':'','following':'','postingan':''
             }
-        except Exception as e:
+        except Exception:
+
             return {
-                'followers':'-1','following':'-1','postingan':'-1'
+                'followers':'','following':'','postingan':''
             }
     
