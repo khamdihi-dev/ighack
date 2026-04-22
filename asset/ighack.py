@@ -3,7 +3,12 @@ os.system('')
 D='\x1b[32m'
 A='\x1b[37m'
 B='\x1b[38;5;46m'
-def C(name='khamdihi'):os.system('clear'if'linux'in sys.platform.lower()else'cls');print(f"""{B}
+def C(name='khamdihi'):
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
+    print(f"""{B}
       _____                       _    
       \\_   \\__ _  /\\  /\\__ _  ___| | __
        / /\\/ _` |/ /_/ / _` |/ __| |/ /
