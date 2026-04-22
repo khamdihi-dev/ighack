@@ -1,6 +1,6 @@
 # 📱 Instagram hacking Tool for Termux
 
-![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
+![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python)
 ![Termux](https://img.shields.io/badge/Termux-Android-green?logo=android)
 ![Platform](https://img.shields.io/badge/Platform-Linux-lightgrey)
 
