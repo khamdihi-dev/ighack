@@ -1,10 +1,10 @@
-import re,os
+import re,os,uuid
 import json
 import requests
+import base64
 
 dump_list = []
-class InvalidCookieNya(Exception):
-    pass
+
 
 class api:
     def __init__(self, cookie:str):
@@ -14,6 +14,20 @@ class api:
         self.web_query_endpoint = 'https://www.instagram.com/graphql/query/'
         self.cookie = cookie
 
+    #  [ Creat Bearer token ]
+    def GenerateBearerToken(self):
+        try:
+            self.userid = re.search('ds_user_id=(\d+)',self.cookie).group(1)
+            self.session_token = re.search('sessionid=(.*?);',self.cookie).group(1)
+            return base64.b64encode(json.dumps({
+                "ds_user_id":self.userid,
+                "sessionid":self.session_token
+            }).encode()).decode()
+        except AttributeError:
+            print('[+] Cookie tidak valid..')
+            return None
+        
+    # [ Get userid ]
     def public_userid(self, username:list):
         list_uid = set()
         for username in username:
@@ -23,25 +37,37 @@ class api:
                 if ds_user_id:list_uid.add(ds_user_id)
             except:continue
         return list(list_uid)
-            
-    def cookie_isvalid(self):
-        if 'ds_user_id' not in self.cookie or 'sessionid' not in self.cookie:
-            raise InvalidCookieNya('Cookie tidak valid')
-        self.ds_user_id = re.search(r'ds_user_id=(\d+)',self.cookie).group(1)
-        return self.ds_user_id
 
+    # [ Login with cookie ]
     def login(self):
         try:
-            self.uid = self.cookie_isvalid()
+            self.auth = self.GenerateBearerToken()
+            self.uid = re.search(r'ds_user_id=(\d+)',self.cookie).group(1)
             self.respon = requests.get(self.app_endpoint+f'users/{self.uid}/info/',headers={
-                'user-agent':self.useragent,
-                'cookie':self.cookie
+                'authorization': f'Bearer IGT:2:{self.auth}',
+                'x-bloks-version-id': '81fef04dcfc8addef5254d2bc003dda43dcd582c4873d1d14ad8d63ca17e9cdb',
+                'x-fb-client-ip': 'True',
+                'x-fb-connection-type': 'WIFI',
+                'x-fb-friendly-name': f'IgApi: users/{self.uid}/info/',
+                'x-fb-request-analytics-tags': '{"network_tags":{"product":"567067343352427","surface":"undefined","request_category":"api","purpose":"fetch","retry_attempt":"0"}}',
+                'x-fb-server-cluster': 'True',
+                'x-ig-android-id':  f'android-{uuid.uuid4().hex[:16]}',
+                'x-ig-app-id': '567067343352427',
+                'x-ig-app-locale': 'en_US',
+                'x-ig-bandwidth-speed-kbps': '-1.000',
+                'x-ig-bandwidth-totalbytes-b': '0',
+                'x-ig-bandwidth-totaltime-ms': '0',
+                'x-ig-client-endpoint': 'com.bloks.www.caa.login.save-credentials:com.bloks.www.caa.login.save-credentials',
+                'x-ig-capabilities': '3brTv10=',
+                'x-ig-connection-type': 'WIFI',
+                'user-agent': 'Instagram 430.0.0.53.80 Android (32/12; 220dpi; 960x540; OPPO; CPH1912; CPH1912; OPPO; en_US; 974607456)',
+                'x-fb-http-engine': 'Tigon/MNS/TCP',
+                'x-fb-rmd': 'state=URL_ELIGIBLE',
+                'zero-http-network-interface': 'wifi',
             }).json()
             self.nama = self.respon['user']['full_name']
             return {'isvalid':True,'nama':self.nama}
-        except InvalidCookieNya as e:
-            os.remove('data/cookie.txt')
-            exit(f'\n[!] {e}')
+        
         except Exception as e:
             os.remove('data/cookie.txt')
             exit(f'\n[!] {e}')
