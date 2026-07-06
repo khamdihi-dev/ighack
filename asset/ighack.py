@@ -16,6 +16,6 @@ def C(name='khamdihi'):
     \\____/ \\__, \\/ /_/ \\__,_|\\___|_|\\_\\
            |___/                          
 
-    {A}Hi {B}{name}{A}, {B}IGH4CK FORYOU{A}, V5.0
+    {A}Hi {B}{name}{A}, {B}IGH4CK FORYOU{A}, V6.0 {B}BETA{A}
   {A}Created by {B}https://github.com/khamdihi-dev{A}
 """)
