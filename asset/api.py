@@ -67,9 +67,7 @@ class api:
             }).json()
             self.nama = self.respon['user']['full_name']
             return {'isvalid':True,'nama':self.nama}
-        
-        except KeyError:
-            print('\n[!] Gunakan cookie yang lain')
+    
         except Exception as e:
             os.remove('data/cookie.txt')
             exit(f'\n[!] {e}')
