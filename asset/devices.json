@@ -1,0 +1,610 @@
+{
+  "devices": [
+    {
+      "manufacturer": "Xiaomi",
+      "model": "2107113SG",
+      "device_name": "Redmi 10",
+      "brand": "Xiaomi"
+    },
+    {
+      "manufacturer": "Xiaomi",
+      "model": "21091116AG",
+      "device_name": "Redmi 10 2022",
+      "brand": "Xiaomi"
+    },
+    {
+      "manufacturer": "Xiaomi",
+      "model": "2201116TG",
+      "device_name": "Redmi Note 11",
+      "brand": "Xiaomi"
+    },
+    {
+      "manufacturer": "Xiaomi",
+      "model": "2201117TG",
+      "device_name": "Redmi Note 11 Pro",
+      "brand": "Xiaomi"
+    },
+    {
+      "manufacturer": "Xiaomi",
+      "model": "2209116AG",
+      "device_name": "Redmi Note 12",
+      "brand": "Xiaomi"
+    },
+    {
+      "manufacturer": "Xiaomi",
+      "model": "M2007J20CG",
+      "device_name": "Redmi Note 9 Pro",
+      "brand": "Xiaomi"
+    },
+    {
+      "manufacturer": "Xiaomi",
+      "model": "M2003J6CI",
+      "device_name": "Redmi Note 9",
+      "brand": "Xiaomi"
+    },
+    {
+      "manufacturer": "Xiaomi",
+      "model": "M2101K6G",
+      "device_name": "Redmi Note 10 Pro",
+      "brand": "Xiaomi"
+    },
+    {
+      "manufacturer": "Xiaomi",
+      "model": "M2101K7AG",
+      "device_name": "Redmi Note 10",
+      "brand": "Xiaomi"
+    },
+    {
+      "manufacturer": "Xiaomi",
+      "model": "M2006C3LG",
+      "device_name": "Redmi 9A",
+      "brand": "Xiaomi"
+    },
+    {
+      "manufacturer": "Xiaomi",
+      "model": "M2004J19C",
+      "device_name": "Redmi 9",
+      "brand": "Xiaomi"
+    },
+    {
+      "manufacturer": "Xiaomi",
+      "model": "M2010J19SG",
+      "device_name": "Redmi Note 9T",
+      "brand": "Xiaomi"
+    },
+    {
+      "manufacturer": "Xiaomi",
+      "model": "220333QBI",
+      "device_name": "Redmi 10C",
+      "brand": "Xiaomi"
+    },
+    {
+      "manufacturer": "Xiaomi",
+      "model": "220333QBG",
+      "device_name": "Redmi 10C",
+      "brand": "Xiaomi"
+    },
+    {
+      "manufacturer": "Xiaomi",
+      "model": "21061119DG",
+      "device_name": "Redmi 9C",
+      "brand": "Xiaomi"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-A525F",
+      "device_name": "Galaxy A52",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-A525F",
+      "device_name": "Galaxy A52 4G",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-A526B",
+      "device_name": "Galaxy A52 5G",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-A325F",
+      "device_name": "Galaxy A32",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-A225F",
+      "device_name": "Galaxy A22",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-A125F",
+      "device_name": "Galaxy A12",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-A035F",
+      "device_name": "Galaxy A03",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-A037F",
+      "device_name": "Galaxy A03s",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-M325FV",
+      "device_name": "Galaxy M32",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-M127F",
+      "device_name": "Galaxy M12",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-M225FV",
+      "device_name": "Galaxy M22",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-G990E",
+      "device_name": "Galaxy S21 FE",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-G780F",
+      "device_name": "Galaxy S20 FE",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-G991B",
+      "device_name": "Galaxy S21",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-G996B",
+      "device_name": "Galaxy S21+",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-G998B",
+      "device_name": "Galaxy S21 Ultra",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-S901B",
+      "device_name": "Galaxy S22",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-S906B",
+      "device_name": "Galaxy S22+",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-S908B",
+      "device_name": "Galaxy S22 Ultra",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "samsung",
+      "model": "SM-N985F",
+      "device_name": "Galaxy Note 20 Ultra",
+      "brand": "samsung"
+    },
+    {
+      "manufacturer": "OPPO",
+      "model": "CPH2239",
+      "device_name": "OPPO A54",
+      "brand": "OPPO"
+    },
+    {
+      "manufacturer": "OPPO",
+      "model": "CPH2273",
+      "device_name": "OPPO A16",
+      "brand": "OPPO"
+    },
+    {
+      "manufacturer": "OPPO",
+      "model": "CPH2195",
+      "device_name": "OPPO A53s",
+      "brand": "OPPO"
+    },
+    {
+      "manufacturer": "OPPO",
+      "model": "CPH2211",
+      "device_name": "OPPO A74",
+      "brand": "OPPO"
+    },
+    {
+      "manufacturer": "OPPO",
+      "model": "CPH2359",
+      "device_name": "OPPO A55",
+      "brand": "OPPO"
+    },
+    {
+      "manufacturer": "OPPO",
+      "model": "CPH2363",
+      "device_name": "OPPO A57",
+      "brand": "OPPO"
+    },
+    {
+      "manufacturer": "OPPO",
+      "model": "CPH2371",
+      "device_name": "OPPO A17",
+      "brand": "OPPO"
+    },
+    {
+      "manufacturer": "OPPO",
+      "model": "CPH2333",
+      "device_name": "OPPO Reno6",
+      "brand": "OPPO"
+    },
+    {
+      "manufacturer": "OPPO",
+      "model": "CPH2343",
+      "device_name": "OPPO Reno7",
+      "brand": "OPPO"
+    },
+    {
+      "manufacturer": "OPPO",
+      "model": "CPH2207",
+      "device_name": "OPPO Reno6 Z",
+      "brand": "OPPO"
+    },
+    {
+      "manufacturer": "OPPO",
+      "model": "CPH1912",
+      "device_name": "OPPO A9",
+      "brand": "OPPO"
+    },
+    {
+      "manufacturer": "OPPO",
+      "model": "CPH1920",
+      "device_name": "OPPO Reno2",
+      "brand": "OPPO"
+    },
+    {
+      "manufacturer": "Realme",
+      "model": "RMX3201",
+      "device_name": "Realme C21",
+      "brand": "Realme"
+    },
+    {
+      "manufacturer": "Realme",
+      "model": "RMX3381",
+      "device_name": "Realme C25",
+      "brand": "Realme"
+    },
+    {
+      "manufacturer": "Realme",
+      "model": "RMX3263",
+      "device_name": "Realme C25s",
+      "brand": "Realme"
+    },
+    {
+      "manufacturer": "Realme",
+      "model": "RMX3242",
+      "device_name": "Realme C35",
+      "brand": "Realme"
+    },
+    {
+      "manufacturer": "Realme",
+      "model": "RMX3430",
+      "device_name": "Realme C30",
+      "brand": "Realme"
+    },
+    {
+      "manufacturer": "Realme",
+      "model": "RMX3461",
+      "device_name": "Realme C33",
+      "brand": "Realme"
+    },
+    {
+      "manufacturer": "Realme",
+      "model": "RMX3363",
+      "device_name": "Realme GT Master",
+      "brand": "Realme"
+    },
+    {
+      "manufacturer": "Realme",
+      "model": "RMX3392",
+      "device_name": "Realme 8",
+      "brand": "Realme"
+    },
+    {
+      "manufacturer": "Realme",
+      "model": "RMX3241",
+      "device_name": "Realme 8i",
+      "brand": "Realme"
+    },
+    {
+      "manufacturer": "Realme",
+      "model": "RMX3357",
+      "device_name": "Realme 7",
+      "brand": "Realme"
+    },
+    {
+      "manufacturer": "Realme",
+      "model": "RMX3093",
+      "device_name": "Realme 6",
+      "brand": "Realme"
+    },
+    {
+      "manufacturer": "vivo",
+      "model": "V2027",
+      "device_name": "vivo Y20",
+      "brand": "vivo"
+    },
+    {
+      "manufacturer": "vivo",
+      "model": "V2044",
+      "device_name": "vivo Y31",
+      "brand": "vivo"
+    },
+    {
+      "manufacturer": "vivo",
+      "model": "V2036",
+      "device_name": "vivo Y51",
+      "brand": "vivo"
+    },
+    {
+      "manufacturer": "vivo",
+      "model": "V2111",
+      "device_name": "vivo Y15s",
+      "brand": "vivo"
+    },
+    {
+      "manufacturer": "vivo",
+      "model": "V2125",
+      "device_name": "vivo Y54",
+      "brand": "vivo"
+    },
+    {
+      "manufacturer": "vivo",
+      "model": "V2135",
+      "device_name": "vivo Y55",
+      "brand": "vivo"
+    },
+    {
+      "manufacturer": "vivo",
+      "model": "V2140",
+      "device_name": "vivo Y72",
+      "brand": "vivo"
+    },
+    {
+      "manufacturer": "vivo",
+      "model": "V2030",
+      "device_name": "vivo Y11s",
+      "brand": "vivo"
+    },
+    {
+      "manufacturer": "vivo",
+      "model": "V2029",
+      "device_name": "vivo Y12s",
+      "brand": "vivo"
+    },
+    {
+      "manufacturer": "vivo",
+      "model": "V2050",
+      "device_name": "vivo V21",
+      "brand": "vivo"
+    },
+    {
+      "manufacturer": "vivo",
+      "model": "V2108",
+      "device_name": "vivo V21e",
+      "brand": "vivo"
+    },
+    {
+      "manufacturer": "Infinix",
+      "model": "X682B",
+      "device_name": "Infinix HOT 10",
+      "brand": "Infinix"
+    },
+    {
+      "manufacturer": "Infinix",
+      "model": "X689F",
+      "device_name": "Infinix HOT 11",
+      "brand": "Infinix"
+    },
+    {
+      "manufacturer": "Infinix",
+      "model": "X6812",
+      "device_name": "Infinix HOT 11S",
+      "brand": "Infinix"
+    },
+    {
+      "manufacturer": "Infinix",
+      "model": "X667D",
+      "device_name": "Infinix SMART 6",
+      "brand": "Infinix"
+    },
+    {
+      "manufacturer": "Infinix",
+      "model": "X6835",
+      "device_name": "Infinix HOT 12",
+      "brand": "Infinix"
+    },
+    {
+      "manufacturer": "Infinix",
+      "model": "X6826",
+      "device_name": "Infinix HOT 12i",
+      "brand": "Infinix"
+    },
+    {
+      "manufacturer": "Infinix",
+      "model": "X6815",
+      "device_name": "Infinix NOTE 11",
+      "brand": "Infinix"
+    },
+    {
+      "manufacturer": "Infinix",
+      "model": "X695B",
+      "device_name": "Infinix NOTE 12",
+      "brand": "Infinix"
+    },
+    {
+      "manufacturer": "Infinix",
+      "model": "X696B",
+      "device_name": "Infinix NOTE 12 Pro",
+      "brand": "Infinix"
+    },
+    {
+      "manufacturer": "TECNO",
+      "model": "KF6h",
+      "device_name": "TECNO Spark 7",
+      "brand": "TECNO"
+    },
+    {
+      "manufacturer": "TECNO",
+      "model": "KG7n",
+      "device_name": "TECNO Spark 8",
+      "brand": "TECNO"
+    },
+    {
+      "manufacturer": "TECNO",
+      "model": "KI5k",
+      "device_name": "TECNO Spark 8P",
+      "brand": "TECNO"
+    },
+    {
+      "manufacturer": "TECNO",
+      "model": "KG5k",
+      "device_name": "TECNO Spark 8C",
+      "brand": "TECNO"
+    },
+    {
+      "manufacturer": "TECNO",
+      "model": "KE6k",
+      "device_name": "TECNO Spark 6",
+      "brand": "TECNO"
+    },
+    {
+      "manufacturer": "TECNO",
+      "model": "CE7n",
+      "device_name": "TECNO Camon 18",
+      "brand": "TECNO"
+    },
+    {
+      "manufacturer": "TECNO",
+      "model": "CE8j",
+      "device_name": "TECNO Camon 19",
+      "brand": "TECNO"
+    },
+    {
+      "manufacturer": "TECNO",
+      "model": "CI7n",
+      "device_name": "TECNO Camon 18P",
+      "brand": "TECNO"
+    },
+    {
+      "manufacturer": "Nokia",
+      "model": "TA-1333",
+      "device_name": "Nokia 5.4",
+      "brand": "HMD Global"
+    },
+    {
+      "manufacturer": "Nokia",
+      "model": "TA-1394",
+      "device_name": "Nokia G20",
+      "brand": "HMD Global"
+    },
+    {
+      "manufacturer": "Nokia",
+      "model": "TA-1346",
+      "device_name": "Nokia C20",
+      "brand": "HMD Global"
+    },
+    {
+      "manufacturer": "Nokia",
+      "model": "TA-1353",
+      "device_name": "Nokia C21",
+      "brand": "HMD Global"
+    },
+    {
+      "manufacturer": "Nokia",
+      "model": "TA-1377",
+      "device_name": "Nokia G21",
+      "brand": "HMD Global"
+    },
+    {
+      "manufacturer": "OnePlus",
+      "model": "NE2210",
+      "device_name": "OnePlus 10 Pro",
+      "brand": "OnePlus"
+    },
+    {
+      "manufacturer": "OnePlus",
+      "model": "NE2213",
+      "device_name": "OnePlus 10 Pro",
+      "brand": "OnePlus"
+    },
+    {
+      "manufacturer": "OnePlus",
+      "model": "LE2123",
+      "device_name": "OnePlus 9 Pro",
+      "brand": "OnePlus"
+    },
+    {
+      "manufacturer": "OnePlus",
+      "model": "LE2113",
+      "device_name": "OnePlus 9",
+      "brand": "OnePlus"
+    },
+    {
+      "manufacturer": "OnePlus",
+      "model": "LE2117",
+      "device_name": "OnePlus Nord 2",
+      "brand": "OnePlus"
+    },
+    {
+      "manufacturer": "Google",
+      "model": "Pixel 6",
+      "device_name": "Pixel 6",
+      "brand": "Google"
+    },
+    {
+      "manufacturer": "Google",
+      "model": "Pixel 6 Pro",
+      "device_name": "Pixel 6 Pro",
+      "brand": "Google"
+    },
+    {
+      "manufacturer": "Google",
+      "model": "Pixel 6a",
+      "device_name": "Pixel 6a",
+      "brand": "Google"
+    },
+    {
+      "manufacturer": "Google",
+      "model": "Pixel 5",
+      "device_name": "Pixel 5",
+      "brand": "Google"
+    },
+    {
+      "manufacturer": "Google",
+      "model": "Pixel 5a",
+      "device_name": "Pixel 5a",
+      "brand": "Google"
+    }
+  ]
+}
