@@ -69,7 +69,7 @@ class api:
             return {'isvalid':True,'nama':self.nama}
         
         except KeyError:
-            exit('\n[!] Gunakan cookie yang lain')
+            print('\n[!] Gunakan cookie yang lain')
         except Exception as e:
             os.remove('data/cookie.txt')
             exit(f'\n[!] {e}')
