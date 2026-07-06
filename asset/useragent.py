@@ -1,109 +1,176 @@
+import json
 import random
+import os
+import hashlib
+import base64
+import string
 
-class InstagramClient:
-    def __init__(self):
-        with open('asset/igversi.txt', 'r') as f:
-            self.ig_versi = [line.strip() for line in f if line.strip()]
+def load_devices_from_json(file_path="asset/devices.json"):
+    """
+    Load devices from JSON file
+    """
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            return data.get('devices', [])
+    except FileNotFoundError:
+        print(f"File {file_path} tidak ditemukan!")
+        return []
+    except json.JSONDecodeError:
+        print(f"File {file_path} format JSON tidak valid!")
+        return []
 
-        self.ig_app_versi, self.ig_app_versi_code = random.choice(self.ig_versi).split(':')
+def generate_mid(prefix="ae", length=22):
+    """
+    Generate MID dengan prefix tertentu
+    Karakter yang diizinkan: huruf, angka, dan underscore (_)
+    """
+    chars = string.ascii_letters + string.digits + "_"
+    random_part = ''.join(random.choices(chars, k=length - len(prefix)))
+    return prefix + random_part
 
-    def NewUserAgentApps(self):
-        DEVICE_PROFILES = [
-            {
-                "manufacturer": "samsung", "brand": "samsung",
-                "model": "SM-G991B", "device": "o1s",
-                "chipset": "exynos2100", "resolution": "1080x2400", "dpi": "480",
-                "android_versions": [("11", "30"), ("12", "31"), ("13", "33")],
-            },
-            {
-                "manufacturer": "samsung", "brand": "samsung",
-                "model": "SM-S918B", "device": "dm3q",
-                "chipset": "snapdragon8gen2", "resolution": "1080x2340", "dpi": "480",
-                "android_versions": [("13", "33"), ("14", "34")],
-            },
-            {
-                "manufacturer": "Google", "brand": "google",
-                "model": "Pixel 6", "device": "oriole",
-                "chipset": "tensor", "resolution": "1080x2400", "dpi": "411",
-                "android_versions": [("12", "31"), ("13", "33"), ("14", "34")],
-            },
-            {
-                "manufacturer": "Google", "brand": "google",
-                "model": "Pixel 7", "device": "panther",
-                "chipset": "tensor_g2", "resolution": "1080x2400", "dpi": "416",
-                "android_versions": [("13", "33"), ("14", "34")],
-            },
-            {
-                "manufacturer": "OnePlus", "brand": "OnePlus",
-                "model": "IN2020", "device": "OnePlus8",
-                "chipset": "snapdragon865", "resolution": "1080x2400", "dpi": "400",
-                "android_versions": [("11", "30"), ("12", "31")],
-            },
-            {
-                "manufacturer": "OnePlus", "brand": "OnePlus",
-                "model": "CPH2411", "device": "OnePlus10Pro",
-                "chipset": "snapdragon8gen1", "resolution": "1440x3216", "dpi": "525",
-                "android_versions": [("12", "31"), ("13", "33")],
-            },
-            {
-                "manufacturer": "Xiaomi", "brand": "Redmi",
-                "model": "M2101K7AG", "device": "sunny",
-                "chipset": "snapdragon678", "resolution": "1080x2400", "dpi": "395",
-                "android_versions": [("11", "30"), ("12", "31")],
-            },
-            {
-                "manufacturer": "Xiaomi", "brand": "Xiaomi",
-                "model": "2201123G", "device": "zeus",
-                "chipset": "snapdragon8gen1", "resolution": "1440x3200", "dpi": "521",
-                "android_versions": [("12", "31"), ("13", "33")],
-            },
-            {
-                "manufacturer": "motorola", "brand": "motorola",
-                "model": "moto g(30)", "device": "caprip",
-                "chipset": "snapdragon662", "resolution": "720x1600", "dpi": "269",
-                "android_versions": [("11", "30"), ("12", "31")],
-            },
-            {
-                "manufacturer": "OPPO", "brand": "OPPO",
-                "model": "CPH2173", "device": "OP4F7F",
-                "chipset": "snapdragon870", "resolution": "1080x2400", "dpi": "460",
-                "android_versions": [("11", "30"), ("12", "31")],
-            },
-            {
-                "manufacturer": "Sony", "brand": "Sony",
-                "model": "XQ-AS52", "device": "pdx203",
-                "chipset": "snapdragon865", "resolution": "1080x2520", "dpi": "449",
-                "android_versions": [("11", "30"), ("12", "31")],
-            },
-            {
-                "manufacturer": "realme", "brand": "realme",
-                "model": "RMX3085", "device": "RMX3085",
-                "chipset": "snapdragon888", "resolution": "1080x2400", "dpi": "400",
-                "android_versions": [("11", "30"), ("12", "31")],
-            },
+def generate_mid_from_device(prefix="ae", device_info=None):
+    """
+    Generate MID dari informasi device (lebih konsisten)
+    Panjang total: 22 karakter (prefix 2 + 20 karakter)
+    Karakter yang diizinkan: huruf, angka, dan underscore (_)
+    """
+    if device_info:
+        device_str = f"{device_info.get('manufacturer', '')}{device_info.get('model', '')}{device_info.get('device_name', '')}"
+        hash_obj = hashlib.md5(device_str.encode())
+        hash_part = base64.b64encode(hash_obj.digest()).decode()
+        hash_part = hash_part.replace('/', '_').replace('+', '0').replace('=', '')
+        hash_part = hash_part[:20]
+        return f"{prefix}{hash_part}"
+    else:
+        return generate_mid(prefix)
+
+def generate_instagram_ua(
+    version="436.0.0.41.73",
+    android="32/12",
+    dpi="220dpi",
+    resolution="960x540",
+    language="en_US",
+    build="1006556565",
+    random_device=True,
+    custom_device=None,
+    devices_file="asset/devices.json"
+):
+    """
+    Generate Instagram User-Agent dengan load dari file
+    Returns: dict {ua: user_agent, mid: mid, device: device_info}
+    """
+    
+    # Load devices dari file
+    DEVICES = load_devices_from_json(devices_file)
+    
+    if not DEVICES:
+        print("Tidak ada device, pakai default")
+        DEVICES = [
+            {"manufacturer": "Xiaomi", "model": "M2101K7AG", "device_name": "Redmi Note 10", "brand": "Xiaomi"},
+            {"manufacturer": "samsung", "model": "SM-A525F", "device_name": "Galaxy A52", "brand": "samsung"},
         ]
+    
+    # Pilih device
+    if custom_device:
+        manufacturer, model, device_name, brand = custom_device
+        device_info = {
+            "manufacturer": manufacturer,
+            "model": model,
+            "device_name": device_name,
+            "brand": brand
+        }
+    elif random_device:
+        device = random.choice(DEVICES)
+        manufacturer = device['manufacturer']
+        model = device['model']
+        device_name = device['device_name']
+        brand = device['brand']
+        device_info = device
+    else:
+        # Default ke device pertama
+        device = DEVICES[0]
+        manufacturer = device['manufacturer']
+        model = device['model']
+        device_name = device['device_name']
+        brand = device['brand']
+        device_info = device
+    
+    # Build User-Agent
+    user_agent = (
+        f"Instagram {version} Android "
+        f"({android}; {dpi}; {resolution}; "
+        f"{manufacturer}; {model}; "
+        f"{device_name}; {brand}; "
+        f"{language}; {build})"
+    )
+    
+    # Generate MID dari device info
+    mid = generate_mid_from_device("ae", device_info)
+    
+    return {"ua": user_agent, "mid": mid, "device": device_info}
 
-        LOCALES = ["en_US"]
-
-        device = random.choice(DEVICE_PROFILES)
-        android_ver, api_level = random.choice(device["android_versions"])
-        locale = random.choice(LOCALES)
-
-        dpi_final = int(device["dpi"]) + random.randint(-4, 4)
-
-        user_agent = (
-            f"Instagram {self.ig_app_versi} "
-            f"Android ({api_level}/{android_ver}; "
-            f"{dpi_final}dpi; "
-            f"{device['resolution']}; "
-            f"{device['manufacturer']}; "
-            f"{device['model']}; "
-            f"{device['device']}; "
-            f"{device['chipset']}; "
-            f"{locale}; "
-            f"{self.ig_app_versi_code})"
-        )
-
-        return user_agent
-
-
+def generate_barcelona_ua(
+    version="436.0.0.44.75",
+    android="32/12",
+    dpi="220dpi",
+    resolution="960x540",
+    language="en_US",
+    build="1006783842",
+    random_device=True,
+    custom_device=None,
+    devices_file="asset/devices.json"
+):
+    """
+    Generate Barcelona User-Agent (mirip Instagram)
+    Returns: dict {ua: user_agent, mid: mid, device: device_info}
+    """
+    
+    # Load devices dari file
+    DEVICES = load_devices_from_json(devices_file)
+    
+    if not DEVICES:
+        print("Tidak ada device, pakai default")
+        DEVICES = [
+            {"manufacturer": "Xiaomi", "model": "M2101K7AG", "device_name": "Redmi Note 10", "brand": "Xiaomi"},
+            {"manufacturer": "samsung", "model": "SM-A525F", "device_name": "Galaxy A52", "brand": "samsung"},
+            {"manufacturer": "OPPO", "model": "CPH1912", "device_name": "OPPO CPH1912", "brand": "OPPO"},
+        ]
+    
+    # Pilih device
+    if custom_device:
+        manufacturer, model, device_name, brand = custom_device
+        device_info = {
+            "manufacturer": manufacturer,
+            "model": model,
+            "device_name": device_name,
+            "brand": brand
+        }
+    elif random_device:
+        device = random.choice(DEVICES)
+        manufacturer = device['manufacturer']
+        model = device['model']
+        device_name = device['device_name']
+        brand = device['brand']
+        device_info = device
+    else:
+        device = DEVICES[0]
+        manufacturer = device['manufacturer']
+        model = device['model']
+        device_name = device['device_name']
+        brand = device['brand']
+        device_info = device
+    
+    # Build User-Agent Barcelona
+    user_agent = (
+        f"Barcelona {version} Android "
+        f"({android}; {dpi}; {resolution}; "
+        f"{manufacturer}; {model}; "
+        f"{device_name}; {brand}; "
+        f"{language}; {build})"
+    )
+    
+    # Generate MID dari device info
+    mid = generate_mid_from_device("ak", device_info)
+    
+    return {"ua": user_agent, "mid": mid, "device": device_info}
