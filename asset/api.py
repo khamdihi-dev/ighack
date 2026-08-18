@@ -32,9 +32,24 @@ class api:
         list_uid = set()
         for username in username:
             try:
-                respon = requests.get(f'https://www.instagram.com/{username}/',cookies={'cookie':self.cookie}).text
-                ds_user_id = re.search(r'"user_id":"(\d+)"', str(respon)).group(1)
+                header_={  'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+    'accept-language': 'id,en-US;q=0.9,en;q=0.8,ms;q=0.7',
+    'dpr': '1',
+    'priority': 'u=0, i',
+    'sec-ch-prefers-color-scheme': 'light',
+    'sec-fetch-dest': 'document',
+    'sec-fetch-mode': 'navigate',
+    'sec-fetch-site': 'none',
+    'sec-fetch-user': '?1',
+    'upgrade-insecure-requests': '1',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36',
+    'viewport-width': '360',
+}
+                respon = requests.get(f'https://www.instagram.com/{username}/',headers=header_,cookies={'cookie':self.cookie}).text
+                open('debug.html','w').write(respon)
+                ds_user_id = re.search(r'"target_id":"(\d+)"', str(respon)).group(1)
                 if ds_user_id:list_uid.add(ds_user_id)
+            except Exception as e:exit(e)
             except:continue
         return list(list_uid)
 
@@ -67,7 +82,9 @@ class api:
             }).json()
             self.nama = self.respon['user']['full_name']
             return {'isvalid':True,'nama':self.nama}
-    
+        
+        except KeyError:
+            exit('\n[!] Gunakan cookie yang lain')
         except Exception as e:
             os.remove('data/cookie.txt')
             exit(f'\n[!] {e}')
