@@ -11,7 +11,7 @@ class api:
         self.useragent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Instagram 243.1.0.14.111 (iPhone13,3; iOS 15_5; en_US; en-US; scale=3.00; 1170x2532; 382468104) NW/3'
         self.app_endpoint = 'https://i.instagram.com/api/v1/'
         self.web_endpoint = 'https://www.instagram.com/api/v1/'
-        self.web_query_endpoint = 'https://www.instagram.com/graphql/query/'
+        self.web_query_endpoint = 'https://i.instagram.com/graphql/query/'
         self.cookie = cookie
 
     #  [ Creat Bearer token ]
@@ -46,7 +46,7 @@ class api:
     'viewport-width': '360',
 }
                 respon = requests.get(f'https://www.instagram.com/{username}/',headers=header_,cookies={'cookie':self.cookie}).text
-                open('debug.html','w').write(respon)
+                # open('debug.html','w').write(respon)
                 ds_user_id = re.search(r'"target_id":"(\d+)"', str(respon)).group(1)
                 if ds_user_id:list_uid.add(ds_user_id)
             except Exception as e:exit(e)
@@ -91,18 +91,34 @@ class api:
     
     def dump_users(self,userid,after,mode):
         try:
-            self.variabel = 'variables={"id":"%s","first":150,"after":"%s"}'%(userid,after)
-            self.params = "query_hash=58712303d941c6855d4e888c5f0cd22f&{}".format(self.variabel) if not mode else "query_hash=37479f2b8209594dde7facb0d904896a&{}".format(self.variabel)
-            self.respon = requests.get(self.web_query_endpoint,params=self.params,
-                                       headers={"user-agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36","accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","cookie": self.cookie}).json()
-            self.edges_type = 'edge_followed_by' if mode else 'edge_follow'
-            for a in self.respon['data']['user'][self.edges_type]['edges']:
-                dump_list.append(json.dumps(a))
-            print(f'\r[+] {len(dump_list)} saved',end='',flush=True)
-            next = self.respon['data']['user'][self.edges_type]['page_info']['has_next_page']
-            if next:
-                cursor = self.respon['data']['user'][self.edges_type]['page_info']['end_cursor']
-                self.dump_users(userid,cursor,mode)
+            if mode: path='followers'
+            else:path = 'following'
+            self.csrf = re.findall('csrftoken=(.*?);',self.cookie)
+            self.max_id = 12
+            while True:
+                try:
+                    if not self.csrf: self.csrf = ['M8l6lXsVYwuoOoi3MapkO9p3xUGVJGsp']
+                    headers = {'accept': '*/*','accept-language': 'id-ID,id;q=0.9,en-GB;q=0.8,en;q=0.7,en-US;q=0.6','dpr': '3','origin': 'https://www.instagram.com','priority': 'u=1, i','sec-ch-prefers-color-scheme': 'light','sec-ch-ua-mobile': '?1','sec-ch-ua-model': '"iPhone"','sec-ch-ua-platform': '"iOS"','sec-ch-ua-platform-version': '"18.5"','sec-fetch-dest': 'empty','sec-fetch-mode': 'cors','sec-fetch-site': 'same-origin','user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36','viewport-width': '393','x-asbd-id': '359341','x-csrftoken': self.csrf[0],'x-ig-app-id': '936619743392459','x-ig-max-touch-points': '1','x-ig-www-claim': 'hmac.AR2uTtxfHOcP5tC3VpBx6veUaTOosqWucojIsld-TsyPwdl4','x-requested-with': 'XMLHttpRequest',}
+                    params = {
+                        'count': '12',
+                        'max_id': self.max_id,
+                        'search_surface': 'follow_list_page',
+                    }
+
+                    self.respon = requests.get(
+                        f'https://www.instagram.com/api/v1/friendships/{userid}/{path}/',
+                        headers=headers,
+                        params=params,
+                        cookies={'cookie':self.cookie}
+                    ).json()
+                    # input(f'next max id {self.max_id} {self.respon}')
+                    self.more = self.respon.get('has_more')
+                    for a in self.respon['users']:
+                        dump_list.append(json.dumps(a))
+                    print(f'\r[+] {len(dump_list)} saved',end='',flush=True)
+                    if self.more: self.max_id = self.respon['next_max_id']
+                    else:break
+                except (KeyboardInterrupt,KeyError): break
             return {
                 'yamete_id_list':dump_list,
                 'error_message':None
